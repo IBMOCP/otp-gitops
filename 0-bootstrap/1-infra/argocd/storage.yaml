@@ -19,7 +19,7 @@ spec:
     helm:
       values: |
         ocs-operator:
-          channel: ${CHANNEL}
+          channel: stable-4.8
           sizeGiB: 512
           storageClass: ${STORCLASS}
           argo:
