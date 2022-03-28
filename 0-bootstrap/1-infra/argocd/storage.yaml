@@ -22,11 +22,11 @@ spec:
         ocs-operator:
           channel: stable-4.8
           sizeGiB: 512
-          storageClass: gp2
+          storageClass: ocs-storagecluster-ceph-rbd
 =======
-          channel: ${CHANNEL}
+          channel: stable-4.8
           sizeGiB: 512
-          storageClass: ${STORCLASS}
+          storageClass: ocs-storagecluster-ceph-rbd
 >>>>>>> 9ef30d7e14c32cbe1103a5d33dafe72d59809cfe
           argo:
             namespace: openshift-gitops
