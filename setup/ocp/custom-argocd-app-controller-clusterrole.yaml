@@ -396,19 +396,31 @@ rules:
       - virtualmachineinstances
       - virtualmachine-validator
   - verbs:
+<<<<<<< HEAD
     - '*'
+=======
+      - '*'
+>>>>>>> 9ef30d7e14c32cbe1103a5d33dafe72d59809cfe
     apiGroups:
       - platform.stackrox.io
     resources: 
       - '*'
   - verbs:
+<<<<<<< HEAD
     - '*'
+=======
+      - '*'
+>>>>>>> 9ef30d7e14c32cbe1103a5d33dafe72d59809cfe
     apiGroups:
       - oauth.openshift.io
     resources: 
       - 'oauthclients'
   - verbs:
+<<<<<<< HEAD
     - '*'
+=======
+      - '*'
+>>>>>>> 9ef30d7e14c32cbe1103a5d33dafe72d59809cfe
     apiGroups:
       - cert-manager.io
     resources: 
@@ -416,11 +428,30 @@ rules:
       - 'issuers'
       - 'clusterissuers'
   - verbs:
+<<<<<<< HEAD
     - '*'
+=======
+      - '*'
+>>>>>>> 9ef30d7e14c32cbe1103a5d33dafe72d59809cfe
     apiGroups:
       - hive.openshift.io
     resources: 
       - 'selectorsyncsets'
+<<<<<<< HEAD
+=======
+  - verbs:
+      - '*'
+    apiGroups:
+      - quay.redhat.com
+    resources:
+      - quayregistries
+  - verbs:
+      - '*'
+    apiGroups:
+      - agent-install.openshift.io
+    resources:
+      - agentserviceconfigs
+>>>>>>> 9ef30d7e14c32cbe1103a5d33dafe72d59809cfe
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole

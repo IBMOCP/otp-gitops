@@ -18,15 +18,15 @@ spec:
     path: machinesets
     helm:
       values: |
-          infrastructureId: dls-mgmt-vt4hn
+          infrastructureId: "${INFRASTRUCTURE_ID}"
           # cloudProvider.name set to aws, azure or vsphere
           cloudProvider:
-            name: aws
-            managed: false
+            name: "${PLATFORM}"
+            managed: ${MANAGED}
           # only for "aws" or "azure" maybe "gcp"
           cloud:
-            region: us-east-2
-            image: ami-09145c219cb4df3e1
+            region: ${REGION}
+            image: ${IMAGE_NAME}
           # only for "vsphere" - ignored for other
           vsphere:
             networkName: ${VS_NETWORK}

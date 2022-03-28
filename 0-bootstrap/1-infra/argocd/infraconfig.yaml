@@ -18,10 +18,9 @@ spec:
     path: infraconfig
     helm:
       values: |
-        refarch-infraconfig:
           cloudProvider:
-            name: aws
-            managed: false
+            name: "${PLATFORM}" # set to aws or vsphere,
+            managed: ${MANAGED} # set to true for ARO or ROSA
           argo:
             namespace: openshift-gitops
             serviceAccount: openshift-gitops-cntk-argocd-application-controller
@@ -29,7 +28,7 @@ spec:
             storageClassName: ocs-storagecluster-cephfs
             replicas: 2
           ingress:
-            replicas: 2
+            replicas: 3
           image-registry-hook-job:
             name: infraconfig-postsync
             namespace: tools

@@ -1,14 +1,14 @@
 resources:
  # IBM Foundations / Common Services
-#  - argocd/operators/ibm-foundations.yaml
-#  - argocd/instances/ibm-foundational-services-instance.yaml
- # - argocd/operators/ibm-automation-foundation-core-operator.yaml
- # - argocd/operators/ibm-automation-foundation-operator.yaml
- # - argocd/operators/ibm-common-services-mcm.yaml
- # - argocd/instances/ibm-common-services-mcm-instance.yaml
+ #- argocd/operators/ibm-foundations.yaml
+ #- argocd/instances/ibm-foundational-services-instance.yaml
+ #- argocd/operators/ibm-automation-foundation-core-operator.yaml
+ #- argocd/operators/ibm-automation-foundation-operator.yaml
+ #- argocd/operators/ibm-common-services-mcm.yaml
+ #- argocd/instances/ibm-common-services-mcm-instance.yaml
 
  # IBM Catalogs
-#  - argocd/operators/ibm-catalogs.yaml
+ #- argocd/operators/ibm-catalogs.yaml
 
  # Required for IBM MQ
  #- argocd/instances/openldap.yaml
@@ -21,9 +21,7 @@ resources:
 
  # Secrets Managment
  - argocd/instances/sealed-secrets.yaml
- - argocd/operators/external-secrets.yaml
  - argocd/instances/external-secrets.yaml
-
 
  # CICD
  #- argocd/operators/grafana-operator.yaml
@@ -42,10 +40,15 @@ resources:
  - argocd/operators/openshift-acm.yaml
  - argocd/instances/openshift-acm-instance.yaml
  - argocd/instances/openshift-acm-observability-instance.yaml
+ # Red Hat Advanced Cluster Management - Central Infrastructure Management
+ - argocd/instances/openshift-acm-cim.yaml
+ # Red Hat Advanced Cluster Management - Discovery Service
+ #- argocd/instances/openshift-acm-discovery-service.yaml
+
  #- argocd/operators/ibm-cp4mcm-operator.yaml
  #- argocd/instances/ibm-cp4mcm-instance.yaml
-#  - argocd/operators/ibm-infra-automation-operator.yaml
-#  - argocd/instances/ibm-infra-automation-instance.yaml
+ #- argocd/operators/ibm-infra-automation-operator.yaml
+ #- argocd/instances/ibm-infra-automation-instance.yaml
 
  # Ansible Automation Platform
  - argocd/operators/ansible-automation-platform-operator.yaml
@@ -71,6 +74,12 @@ resources:
 #  - argocd/instances/rhsso-integration-preprocessing-instance.yaml
 #  - argocd/instances/rhsso-integration-argocd-instance.yaml
 
+# Red Hat Quay Registry
+# - argocd/operators/quay-registry.yaml
+# - argocd/instances/quay-registry-instance.yaml
+# - argocd/operators/quay-container-security.yaml
+# - argocd/operators/quay-bridge-operator.yaml
+
 patches:
 - target:
     group: argoproj.io
@@ -79,10 +88,10 @@ patches:
   patch: |-
     - op: add
       path: /spec/source/repoURL
-      value: https://github.com/IBMOCP/otp-gitops-services.git
+      value: ${GIT_BASEURL}/${GIT_ORG}/${GIT_GITOPS_SERVICES}
     - op: add
       path: /spec/source/targetRevision
-      value: master
+      value: ${GIT_GITOPS_BRANCH}
 - target:
     group: argoproj.io
     kind: Application
@@ -90,7 +99,7 @@ patches:
   patch: |-
     - op: add
       path: /spec/source/repoURL
-      value: https://charts.cloudnativetoolkit.dev
+      value: ${HELM_REPOURL}
 - target:
     name: ibm-automation-foundation-operator
   patch: |-

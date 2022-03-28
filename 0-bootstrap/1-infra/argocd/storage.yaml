@@ -18,10 +18,16 @@ spec:
     path: storage
     helm:
       values: |
+<<<<<<< HEAD
         ocs-operator:
           channel: stable-4.8
           sizeGiB: 512
           storageClass: gp2
+=======
+          channel: ${CHANNEL}
+          sizeGiB: 512
+          storageClass: ${STORCLASS}
+>>>>>>> 9ef30d7e14c32cbe1103a5d33dafe72d59809cfe
           argo:
             namespace: openshift-gitops
             serviceAccount: openshift-gitops-cntk-argocd-application-controller

@@ -1,7 +1,9 @@
 resources:
  - 1-infra/1-infra.yaml
  - 2-services/2-services.yaml
- #- 3-apps/3-apps.yaml
+# - 3-clusters/3-clusters.yaml
+# - 4-apps/4-apps.yaml
+# - 5-policies/5-policies.yaml
 patches:
 - target:
     group: argoproj.io
@@ -10,17 +12,17 @@ patches:
   patch: |-
     - op: add
       path: /spec/source/repoURL
-      value: https://github.com/IBMOCP/otp-gitops.git
+      value: ${GIT_BASEURL}/${GIT_ORG}/${GIT_GITOPS}
     - op: add
       path: /spec/source/targetRevision
-      value: master
+      value: ${GIT_GITOPS_BRANCH}
 - target:
     group: argoproj.io
     kind: AppProject
   patch: |-
     - op: add
       path: /spec/sourceRepos/-
-      value: https://charts.cloudnativetoolkit.dev
+      value: ${HELM_REPOURL}
 - target:
     group: argoproj.io
     kind: AppProject
@@ -28,10 +30,10 @@ patches:
   patch: |-
     - op: add
       path: /spec/sourceRepos/-
-      value: https://github.com/IBMOCP/otp-gitops.git
+      value: ${GIT_BASEURL}/${GIT_ORG}/${GIT_GITOPS}
     - op: add
       path: /spec/sourceRepos/-
-      value: https://github.com/IBMOCP/otp-gitops-infra.git
+      value: ${GIT_BASEURL}/${GIT_ORG}/${GIT_GITOPS_INFRA}
 - target:
     group: argoproj.io
     kind: AppProject
@@ -39,10 +41,10 @@ patches:
   patch: |-
     - op: add
       path: /spec/sourceRepos/-
-      value: https://github.com/IBMOCP/otp-gitops.git
+      value: ${GIT_BASEURL}/${GIT_ORG}/${GIT_GITOPS}
     - op: add
       path: /spec/sourceRepos/-
-      value: https://github.com/IBMOCP/otp-gitops-services.git
+      value: ${GIT_BASEURL}/${GIT_ORG}/${GIT_GITOPS_SERVICES}
 - target:
     group: argoproj.io
     kind: AppProject
@@ -50,7 +52,29 @@ patches:
   patch: |-
     - op: add
       path: /spec/sourceRepos/-
-      value: https://github.com/IBMOCP/otp-gitops.git
+      value: ${GIT_BASEURL}/${GIT_ORG}/${GIT_GITOPS}
     - op: add
       path: /spec/sourceRepos/-
-      value: https://github.com/IBMOCP/otp-gitops-apps.git
+      value: ${GIT_BASEURL}/${GIT_ORG}/${GIT_GITOPS_APPLICATIONS}
+- target:
+    group: argoproj.io
+    kind: AppProject
+    labelSelector: "gitops.tier.layer=clusters"
+  patch: |-
+    - op: add
+      path: /spec/sourceRepos/-
+      value: ${GIT_BASEURL}/${GIT_ORG}/${GIT_GITOPS}
+    - op: add
+      path: /spec/sourceRepos/-
+      value: ${GIT_BASEURL}/${GIT_ORG}/${GIT_GITOPS_CLUSTERS}
+- target:
+    group: argoproj.io
+    kind: AppProject
+    labelSelector: "gitops.tier.layer=policies"
+  patch: |-
+    - op: add
+      path: /spec/sourceRepos/-
+      value: ${GIT_BASEURL}/${GIT_ORG}/${GIT_GITOPS}
+    - op: add
+      path: /spec/sourceRepos/-
+      value: ${GIT_BASEURL}/${GIT_ORG}/${GIT_GITOPS_POLICIES}
