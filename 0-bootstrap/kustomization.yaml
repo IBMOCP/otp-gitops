@@ -2,7 +2,6 @@ resources:
  - 1-infra/1-infra.yaml
  #- 2-services/2-services.yaml
  #- 3-apps/3-apps.yaml
->>>>>>> 12cd856b2895026da1ca7259b4213be3dc5a712b
 patches:
 - target:
     group: argoproj.io
